@@ -1,0 +1,36 @@
+{
+    "dbConfig": {
+        "url": "mongodb://localhost:27017",
+        "options": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        },
+        "dbName": "",
+        "sender": ""
+    },
+    "config": {
+        "startSecond": 0,
+        "startMinute": 1,
+        "timeout": 61,
+        "rest": {
+            "username": "",
+            "latmin": 53.36837696691308,
+            "latmax": 53.60574780621288,
+            "lonmin": 9.652862548828127,
+            "lonmax": 10.244407653808596
+        }
+    },
+    "logger": {
+        "level": "warn",
+        "filter": 0,
+        "filename": ""
+    },
+    "ssh": {
+        "forward": "61126:127.0.0.1:61126",
+        "host": "***"
+    },
+    "loggy": {
+        "token": "***",
+        "subdomain": "***"
+    }
+}

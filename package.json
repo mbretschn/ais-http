@@ -1,0 +1,30 @@
+{
+  "name": "ais-http",
+  "version": "0.9.13",
+  "description": "A demon service to poll Position Reports and Static and Voyage Related Data via HTTP and store into MongoDB.",
+  "main": "src",
+  "scripts": {
+    "postinstall": "node-config-ts",
+    "start": "ts-node index.ts"
+  },
+  "keywords": [
+    "AIS"
+  ],
+  "author": {
+    "name": "Marcel Bretschneider",
+    "email": "info@3epnm.de"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "compressjs": "^1.0.3",
+    "ais-tools": "^0.9.13",
+    "node-config-ts": "2.3.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/node-fetch": "^2.5.7",
+    "typescript": "^3.8.3",
+    "ts-node": "^8.10.1"
+  }
+}

@@ -1,17 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
-interface Config2 {
-  dbConfig: DbConfig;
-  config: Config;
+interface Config {
+  database: Database;
+  dispatcher: Dispatcher;
   logger: Logger;
   ssh: Ssh;
-  loggy: Loggy;
-}
-interface Loggy {
-  token: string;
-  subdomain: string;
 }
 interface Ssh {
+  enabled: boolean;
   forward: string;
   host: string;
 }
@@ -20,7 +16,7 @@ interface Logger {
   filter: number;
   filename: string;
 }
-interface Config {
+interface Dispatcher {
   startSecond: number;
   startMinute: number;
   timeout: number;
@@ -33,7 +29,7 @@ interface Rest {
   lonmin: number;
   lonmax: number;
 }
-interface DbConfig {
+interface Database {
   url: string;
   options: Options;
   dbName: string;

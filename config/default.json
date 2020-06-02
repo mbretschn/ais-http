@@ -1,5 +1,5 @@
 {
-    "dbConfig": {
+    "database": {
         "url": "mongodb://localhost:27017",
         "options": {
             "useNewUrlParser": true,
@@ -8,7 +8,7 @@
         "dbName": "",
         "sender": ""
     },
-    "config": {
+    "dispatcher": {
         "startSecond": 0,
         "startMinute": 1,
         "timeout": 61,
@@ -26,11 +26,8 @@
         "filename": ""
     },
     "ssh": {
+        "enabled": true,
         "forward": "61126:127.0.0.1:61126",
         "host": "***"
-    },
-    "loggy": {
-        "token": "***",
-        "subdomain": "***"
     }
 }

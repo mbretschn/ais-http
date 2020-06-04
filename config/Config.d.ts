@@ -21,8 +21,7 @@ interface Logger {
   filename: string;
 }
 interface Config {
-  startSecond: number;
-  startMinute: number;
+  second: number;
   timeout: number;
   rest: Rest;
 }

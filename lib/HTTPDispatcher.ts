@@ -34,24 +34,17 @@ export class HTTPDispatcher extends EventEmitter {
         return new Promise(resolve => {
             this.timeout = setTimeout(() => {
                 this.timeout = undefined
-
-                if (this.closing) {
-                    this.exit()
-                    return
-                }
                 resolve()
             }, delay)
         })
     }
 
-    private async wait(seconds: number, minutes: number = 0): Promise<void> {
+    private async wait(): Promise<void> {
         const now = moment()
         const start = moment()
 
-        if (minutes) {
-            start.add(minutes, 'minute')
-        }
-        start.seconds(seconds + 1)
+        start.add(2, 'minutes')
+        start.seconds(this.config.second)
 
         const wait = start.diff(now)
         if (wait < 0) {
@@ -66,7 +59,7 @@ export class HTTPDispatcher extends EventEmitter {
     public async start(): Promise<void> {
         this.logger.info('HTTPDispatcher', this.url.replace(/username=([A-Z_0-9]+)/gm, 'username=********'))
 
-        await this.wait(this.config.startSecond, this.config.startMinute)
+        await this.wait()
         this.run()
     }
 
@@ -75,26 +68,22 @@ export class HTTPDispatcher extends EventEmitter {
             this.closing = true
             if (this.timeout) {
                 clearTimeout(this.timeout)
-                this.logger.info('HTTPDispatcher closed')
-                resolve()
-            } else if (this.error) {
-                this.logger.info('HTTPDispatcher closed')
-                resolve()
-            } else {
-                this.logger.info('HTTPDispatcher close delayed')
-                this.once('stopped', resolve)
             }
+            this.logger.info('HTTPDispatcher closed')
+            resolve()
         })
     }
 
-    private exit(): void {
-        this.logger.info('HTTPDispatcher closed')
-        this.emit('stopped')
+    public message(data: any): void {
+        if (this.closing) {
+            return
+        }
+
+        this.emit('message', data)
     }
 
     private async run(): Promise<void> {
         if (this.closing) {
-            this.exit()
             return
         }
 
@@ -103,10 +92,6 @@ export class HTTPDispatcher extends EventEmitter {
 
         this.logger.verbose(`HTTPDispatcher Request ${start.format('hh:mm:ss')}`)
         await this.job()
-
-        if (this.error) {
-            return
-        }
 
         const now = moment()
         const wait = end.diff(now, 'milliseconds')
@@ -121,7 +106,6 @@ export class HTTPDispatcher extends EventEmitter {
 
     private async job(): Promise<void> {
         if (this.closing) {
-            this.exit()
             return
         }
 
@@ -135,7 +119,7 @@ export class HTTPDispatcher extends EventEmitter {
             if (json[0].ERROR === false) {
                 this.logger.verbose(`HTTPDispatcher Receive ${json[0].RECORDS} Records`)
                 for (const data of json[1]) {
-                    this.emit('message', data)
+                    this.message(data)
                 }
             } else {
                 throw new DispatcherError(json[0].ERROR_MESSAGE, json[0].ERROR)
@@ -144,7 +128,6 @@ export class HTTPDispatcher extends EventEmitter {
             if (ex instanceof DispatcherError) {
                 this.logger.warn(ex.name, ex.message)
             } else {
-                this.error = true
                 this.emit('error', ex)
             }
         }

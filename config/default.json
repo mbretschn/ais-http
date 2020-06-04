@@ -1,19 +1,18 @@
 {
     "database": {
-        "url": "mongodb://localhost:27017",
+        "url": "mongodb://127.0.0.1:27017",
         "options": {
             "useNewUrlParser": true,
             "useUnifiedTopology": true
         },
-        "dbName": "",
-        "sender": ""
+        "dbName": "ais-tracker",
+        "sender": "***"
     },
     "dispatcher": {
-        "startSecond": 0,
-        "startMinute": 1,
+        "second": 0,
         "timeout": 61,
         "rest": {
-            "username": "",
+            "username": "***",
             "latmin": 53.36837696691308,
             "latmax": 53.60574780621288,
             "lonmin": 9.652862548828127,
@@ -21,13 +20,13 @@
         }
     },
     "logger": {
-        "level": "warn",
+        "level": "info",
         "filter": 0,
         "filename": ""
     },
     "ssh": {
-        "enabled": true,
-        "forward": "61126:127.0.0.1:61126",
+        "enabled": false,
+        "forward": "27017:127.0.0.1:27017",
         "host": "***"
     }
 }

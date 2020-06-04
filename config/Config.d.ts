@@ -16,9 +16,8 @@ interface Logger {
   filter: number;
   filename: string;
 }
-interface Dispatcher {
-  startSecond: number;
-  startMinute: number;
+interface Config {
+  second: number;
   timeout: number;
   rest: Rest;
 }

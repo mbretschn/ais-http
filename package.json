@@ -19,7 +19,7 @@
     "compressjs": "^1.0.3",
     "ais-tools": "^0.9.13",
     "node-config-ts": "2.3.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/node": "^13.11.0",
